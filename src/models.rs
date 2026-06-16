@@ -1,13 +1,15 @@
-use serde::Serialize;
-use serde::Deserialize;
+//use chrono::Months;
+//use chrono::Weekday;
+//use serde::Serialize;
+//use serde::Deserialize;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug)]
 pub enum Status{
     Pending,
     Completed,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug)]
 pub enum Category{
     Sports,
     Learning,
@@ -16,30 +18,32 @@ pub enum Category{
     Other(String),
 }
 #[derive(Debug)]
-pub struct Months{
-    month: String,
+pub enum Months{
+    Month(u8),
 }
+
 #[derive(Debug)]
-pub struct Weekday{
-    weekday: String,
+pub enum Weekday{
+    WeekDay(String),
 }
-#[derive(Debug, Serialize, Deserialize)]
+
+#[derive(Debug)]
 pub enum Occurence{
     Daily,
     Weekly(Vec<Weekday>),
     Monthly(Vec<Months>),
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug)]
 pub struct Habit{
     name: String,
     purpose: String,
     category: Category,
     status: Status,
     occurence: Occurence,
-}
+}   
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug)]
 pub struct User{
     name: String,
     id: String,
@@ -48,17 +52,44 @@ pub struct User{
     habit: Habit,
 }
 
-//#[derive(Debug, Serialize, Deserialize)]
-//struct AppData{
-    //user: Vec(<User>),
-//}
+#[derive(Debug, Default)]
+struct AppData<'a>{
+    user: Vec<&'a User>,
+}
 
-
+impl Habit{
+    pub fn create_habit(name: String, purpose: String, category: Category, status: Status, occurence: Occurence)-> Habit{
+        Habit{
+            name,
+            purpose,
+            category,
+            status,
+            occurence,
+        }
+    }
+}
 impl User{
-    fn display(&self){
+    pub fn create_user(name: String, id: String, age: u16, password: String, habit: Habit)-> User{
+        let user = User{
+            name,
+            id,
+            age,
+            password,
+            habit,
+        };
+        let mut data = AppData::default();
+        data.user.push(&user);
+        user
+
+    }
+    pub fn display(&self){
         println!("Name: {}", self.name);
         println!("ID: {}", self.id);
         println!("Age: {}", self.age);
-        println!("Habit: {:?}", self.habit);
+        println!("Habit Name: {0:}", self.habit.name);
+        println!("Habit Purpose: {0:}", self.habit.purpose);
+        println!("Habit Category: {:?}", self.habit.category);
+        println!("Habit Status: {:?}", self.habit.status);
+        println!("Habit Occurence: {:?}", self.habit.occurence);
     }
 }

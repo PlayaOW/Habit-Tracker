@@ -4,21 +4,9 @@ use models::*;
 
 use crate::models::Category::Learning;
 fn main() {
-    let habit = Habit{
-        name: String::from("Learning Math"),
-        purpose: String::from("To get to Calc 3"),
-        category: Category::Learning,
-        status: Status::Pending,
-        occurence: Occurence::Daily,
-    };
+    let habit = models::Habit::create_habit(String::from("Learning Math"), String::from("To get to Calc 3"), Category::Learning, Status::Pending, Occurence::Daily);
 
-    let ray = User{
-        name: String::from("Ray"),
-        id: String::from("1101"),
-        age: 29,
-        password: String::from("Hash"),
-        habit: habit,
-    };
+    let ray = models::User::create_user(String::from("Ray"), String::from("1102"), 29, String::from("Hush"), habit);
 
     ray.display();
 }

@@ -49,7 +49,9 @@ pub struct User{
     id: String,
     age: u16,
     password: String,
-    habit: Habit,
+    habit: Vec<Habit>,
+    //failed to realize at first that One person may have multiple habits
+    // Reason why decided to implement Vector data type for Habit data type
 }
 
 #[derive(Debug, Default)]
@@ -69,27 +71,29 @@ impl Habit{
     }
 }
 impl User{
-    pub fn create_user(name: String, id: String, age: u16, password: String, habit: Habit)-> User{
+    pub fn create_user(name: String, id: String, age: u16, password: String, habits: Vec<Habit>)-> User{
         let user = User{
             name,
             id,
             age,
             password,
-            habit,
+            habit: habits, //This takes a vector data type as args and 
+            // stores that for user as their habit
+            // Associates a habit to a user.
         };
-        let mut data = AppData::default();
-        data.user.push(&user);
-        user
+        user //returns user
 
     }
     pub fn display(&self){
         println!("Name: {}", self.name);
         println!("ID: {}", self.id);
         println!("Age: {}", self.age);
-        println!("Habit Name: {0:}", self.habit.name);
-        println!("Habit Purpose: {0:}", self.habit.purpose);
-        println!("Habit Category: {:?}", self.habit.category);
-        println!("Habit Status: {:?}", self.habit.status);
-        println!("Habit Occurence: {:?}", self.habit.occurence);
+        for habit in &self.habit{
+            println!("Habit Name: {0:}", habit.name);
+            println!("Habit Purpose: {0:}", habit.purpose);
+            println!("Habit Category: {:?}", habit.category);
+            println!("Habit Status: {:?}", habit.status);
+            println!("Habit Occurence: {:?}", habit.occurence);
+        } //Use for loop to display all associated habit for a user.
     }
 }

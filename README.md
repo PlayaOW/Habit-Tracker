@@ -3,10 +3,10 @@
 ## Phase 0: Setup
 **Goal:** Working project skeleton, dependencies compile.
 
-- [ ] `cargo new habit_tracker`
-- [ ] Add all 5 dependencies to `Cargo.toml`
-- [ ] Create the 6 source files (empty `mod` declarations in `main.rs`)
-- [ ] Confirm `cargo build` succeeds with no code yet
+- [x] `cargo new habit_tracker`
+- [x] Add all 5 dependencies to `Cargo.toml`
+- [x] Create the 6 source files (empty `mod` declarations in `main.rs`)
+- [x] Confirm `cargo build` succeeds with no code yet
 
 **Checkpoint:** `cargo build` passes.
 
@@ -15,14 +15,14 @@
 ## Phase 1: Models
 **Goal:** All data types defined, no logic yet.
 
-- [ ] Define `Status` enum with 2 variants
-- [ ] Define `Category` enum with fixed variants + `Other(String)`
-- [ ] Define `Occurrence` enum — `Daily`, `Weekly(Vec<Weekday>)`, `Monthly(Vec<u8>)`
-- [ ] Define `Habit` struct with all fields
-- [ ] Define `User` struct — includes `Vec<Habit>` and `next_habit_id: u64`
-- [ ] Define `AppData` struct — just `Vec<User>`
+- [x] Define `Status` enum with 2 variants
+- [x] Define `Category` enum with fixed variants + `Other(String)`
+- [x] Define `Occurrence` enum — `Daily`, `Weekly(Vec<Weekday>)`, `Monthly(Vec<u8>)`
+- [x] Define `Habit` struct with all fields
+- [x] Define `User` struct — includes `Vec<Habit>` and `next_habit_id: u64`
+- [x] Define `AppData` struct — just `Vec<User>`
 - [ ] Add `#[derive(Debug, Serialize, Deserialize)]` to everything
-- [ ] Implement `Display` for `Status`, `Category`, `Occurrence`, `Habit`
+- [x] Implement `Display` for `Status`, `Category`, `Occurrence`, `Habit`
 
 **Checkpoint:** `cargo build` passes. You can construct a `Habit` in `main.rs` and `println!` it.
 

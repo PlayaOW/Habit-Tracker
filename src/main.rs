@@ -1,6 +1,9 @@
 mod models;
-
+mod habit;
+mod storage;
 use models::*;
+use crate::models::*;
+use storage::*;
 
 //Need a lot more work on main.
 // Especially for taking user input and linking them to the right data.
@@ -13,4 +16,5 @@ fn main() {
     habitList.push(habit1);
     let ray = models::User::create_user(String::from("Ray"), String::from("1102"), 29, String::from("Hush"), habitList);
     ray.display();
+    models::AppData::update_json("./habit_data/data.json", &ray).expect("Failed to update JSON");
 }

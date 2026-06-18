@@ -1,0 +1,26 @@
+{
+  "user": [
+    {
+      "name": "Ray",
+      "id": "1102",
+      "age": 29,
+      "password": "Hush",
+      "habit": [
+        {
+          "name": "Learning Math",
+          "purpose": "To get to Calc 3",
+          "category": "Learning",
+          "status": "Pending",
+          "occurence": "Daily"
+        },
+        {
+          "name": "Learning Rust",
+          "purpose": "Eventually build CLI tools",
+          "category": "Learning",
+          "status": "Pending",
+          "occurence": "Daily"
+        }
+      ]
+    }
+  ]
+}

@@ -1,15 +1,15 @@
+use serde::{Serialize, Deserialize};
+
 //use chrono::Months;
 //use chrono::Weekday;
-//use serde::Serialize;
-//use serde::Deserialize;
 
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub enum Status{
     Pending,
     Completed,
 }
 
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub enum Category{
     Sports,
     Learning,
@@ -17,46 +17,44 @@ pub enum Category{
     Cognitive,
     Other(String),
 }
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub enum Months{
     Month(u8),
 }
 
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub enum Weekday{
     WeekDay(String),
 }
 
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub enum Occurence{
     Daily,
     Weekly(Vec<Weekday>),
     Monthly(Vec<Months>),
 }
 
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Habit{
-    name: String,
-    purpose: String,
-    category: Category,
-    status: Status,
-    occurence: Occurence,
+    pub name: String,
+    pub purpose: String,
+    pub category: Category,
+    pub status: Status,
+    pub occurence: Occurence,
 }   
 
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct User{
-    name: String,
-    id: String,
-    age: u16,
-    password: String,
-    habit: Vec<Habit>,
-    //failed to realize at first that One person may have multiple habits
-    // Reason why decided to implement Vector data type for Habit data type
+    pub name: String,
+    pub id: String,
+    pub age: u16,
+    pub password: String,
+    pub habit: Vec<Habit>,
 }
 
-#[derive(Debug, Default)]
-struct AppData<'a>{
-    user: Vec<&'a User>,
+#[derive(Serialize, Deserialize, Debug, Default)]
+pub struct AppData{
+    pub user: Vec<User>,
 }
 
 impl Habit{
@@ -72,28 +70,26 @@ impl Habit{
 }
 impl User{
     pub fn create_user(name: String, id: String, age: u16, password: String, habits: Vec<Habit>)-> User{
-        let user = User{
+        User{
             name,
             id,
             age,
             password,
-            habit: habits, //This takes a vector data type as args and 
-            // stores that for user as their habit
-            // Associates a habit to a user.
-        };
-        user //returns user
-
+            habit: habits,
+        }
     }
     pub fn display(&self){
         println!("Name: {}", self.name);
         println!("ID: {}", self.id);
         println!("Age: {}", self.age);
+        println!();
         for habit in &self.habit{
             println!("Habit Name: {0:}", habit.name);
             println!("Habit Purpose: {0:}", habit.purpose);
             println!("Habit Category: {:?}", habit.category);
             println!("Habit Status: {:?}", habit.status);
             println!("Habit Occurence: {:?}", habit.occurence);
-        } //Use for loop to display all associated habit for a user.
+            println!()
+        }
     }
 }

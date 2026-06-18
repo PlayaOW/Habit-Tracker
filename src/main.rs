@@ -1,8 +1,6 @@
 mod models;
-mod storage;
 
 use models::*;
-use models::AppData;
 
 //Need a lot more work on main.
 // Especially for taking user input and linking them to the right data.
@@ -15,22 +13,4 @@ fn main() {
     habitList.push(habit1);
     let ray = models::User::create_user(String::from("Ray"), String::from("1102"), 29, String::from("Hush"), habitList);
     ray.display();
-
-    // persist app data to JSON
-    let appdata = AppData { user: vec![ray] };
-    match appdata.save_to_file("./habit_data/data.json") {
-        Ok(_) => println!("Saved appdata to ./habit_data/data.json"),
-        Err(e) => eprintln!("Failed to save appdata: {}", e),
-    }
-
-    // load it back and display
-    match AppData::load_from_file("./habit_data/data.json") {
-        Ok(loaded) => {
-            println!("Loaded appdata from file:");
-            for u in loaded.user.iter() {
-                u.display();
-            }
-        }
-        Err(e) => eprintln!("Failed to load appdata: {}", e),
-    }
 }

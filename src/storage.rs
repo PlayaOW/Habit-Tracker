@@ -1,5 +1,5 @@
 use crate::models::{AppData, User};
-use std::fs;
+use std::{fs::{self, File}, io::Read};
 
 impl AppData {
     pub fn update_json(path: &str, new_item: &User) -> Result<(), Box<dyn std::error::Error>> {
@@ -30,5 +30,37 @@ impl AppData {
         fs::write(path, updated_json)?;
 
         Ok(())
+    }
+    pub fn find_usr(path: &str, userID: &User)-> Option<User>{
+        // This function invokes when user enters their user ID
+        // This goes into the JSON data base to look for the user using their UID
+        // If found it returns an User Object
+        // Other returns None
+        // **Logic** //
+        // First open the file using File::open(path)
+        // Turn the contents of file into string
+        // Then Deserialize the String into struct AppData user vector
+        // Iterate through user vector and use match to user.id to see
+        // whether an user exist, if yes we return Oprion<User> 
+        // This is then handled in main.rs logic to bring out the 
+        // User object by extracting variable that is linked to match
+
+        //let mut data = File::open(path)?;
+        //let usr_data: String = String::from(data.read_to_string(&mut usr_data));
+
+        //data.read_to_string(&mut usr_data);
+
+         let ac_usr_data: AppData = match fs::read_to_string(path){
+            Ok(usr_data) => serde_json::from_str(&usr_data).unwrap_or_default(),
+            Err(_) => AppData::default(),
+         };
+
+         for user in ac_usr_data.user{
+            if user.id == userID.id{
+                return Some(user)
+            }
+         }
+         None
+
     }
 }

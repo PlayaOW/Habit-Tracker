@@ -14,7 +14,8 @@ fn main() {
     let mut habitList: Vec<Habit> = Vec::new();
     habitList.push(habit);
     habitList.push(habit1);
-    let ray = models::User::create_user(String::from("Ray"), String::from("1102"), 29, String::from("Hush"), habitList);
+    let ray = models::User::create_user(String::from("Ray"), String::from("Ray880"), 29, String::from("Hush"), habitList);
     ray.display();
     models::AppData::update_json("./habit_data/data.json", &ray).expect("Failed to update JSON");
+    models::AppData::find_usr("./habit_data/data.json", "Ray880");
 }

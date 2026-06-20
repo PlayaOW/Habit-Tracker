@@ -21,6 +21,13 @@ impl AppData {
         // By defining Rust struct and adding serde attributes, you can easily convert between JSON and Rust data structures, making it easier to work with JSON data in your Rust applications.
         
         // Fix: Push a clone of the User struct directly instead of a String
+        for user in &data.user{
+            if user.name == new_item.name{
+                println!("User ALready Exist!!");
+                println!("Your User ID is: {}", &new_item.id);
+                return Ok(())
+            }
+        }
         data.user.push(new_item.clone());
 
         // Serialize the updated struct back to JSON
@@ -31,7 +38,7 @@ impl AppData {
 
         Ok(())
     }
-    pub fn find_usr(path: &str, userID: &User)-> Option<User>{
+    pub fn find_usr(path: &str, userID: &str)-> Option<User>{
         // This function invokes when user enters their user ID
         // This goes into the JSON data base to look for the user using their UID
         // If found it returns an User Object
@@ -54,12 +61,17 @@ impl AppData {
             Ok(usr_data) => serde_json::from_str(&usr_data).unwrap_or_default(),
             Err(_) => AppData::default(),
          };
+         // This block of code here reads the data from the file and converts it to String
+         // It assigns the converted String to Ok(var) to var..
+         // Else It return AppData::default()
 
-         for user in ac_usr_data.user{
-            if user.id == userID.id{
+         for user in ac_usr_data.user{      // Iterates through AppData.user vector
+            if &user.id == userID{     // Checks whether user.id matches with provided userID in fn param. Had to use to_string() since user.id is String and we are comparing str to String  
+                println!("User Found: {}", user.name);
                 return Some(user)
             }
          }
+         println!("User Not Found!! Try Again");
          None
 
     }

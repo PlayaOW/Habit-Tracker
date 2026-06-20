@@ -16,6 +16,7 @@ fn main() {
     habitList.push(habit1);
     let ray = models::User::create_user(String::from("Ray"), String::from("Ray880"), 29, String::from("Hush"), habitList);
     ray.display();
+    Habit::list_habits(&ray);
     models::AppData::update_json("./habit_data/data.json", &ray).expect("Failed to update JSON");
     models::AppData::find_usr("./habit_data/data.json", "Ray880");
 }

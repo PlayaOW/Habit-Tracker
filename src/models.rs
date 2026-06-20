@@ -76,13 +76,13 @@ impl User{
         println!("ID: {}", self.id);
         println!("Age: {}", self.age);
         println!();
-        for habit in &self.habit{
-            println!("Habit Name: {0:}", habit.name);
-            println!("Habit Purpose: {0:}", habit.purpose);
-            println!("Habit Category: {:?}", habit.category);
-            println!("Habit Status: {:?}", habit.status);
-            println!("Habit Occurence: {:?}", habit.occurence);
-            println!()
-        }
+        // for habit in &self.habit{
+        //     println!("Habit Name: {0:}", habit.name);
+        //     println!("Habit Purpose: {0:}", habit.purpose);
+        //     println!("Habit Category: {:?}", habit.category);
+        //     println!("Habit Status: {:?}", habit.status);
+        //     println!("Habit Occurence: {:?}", habit.occurence);
+        //     println!()
+        // }
     }
 }

@@ -21,7 +21,7 @@
 - [x] Define `Habit` struct with all fields
 - [x] Define `User` struct — includes `Vec<Habit>` and `next_habit_id: u64`
 - [x] Define `AppData` struct — just `Vec<User>`
-- [ ] Add `#[derive(Debug, Serialize, Deserialize)]` to everything
+- [x] Add `#[derive(Debug, Serialize, Deserialize)]` to everything
 - [x] Implement `Display` for `Status`, `Category`, `Occurrence`, `Habit`
 
 **Checkpoint:** `cargo build` passes. You can construct a `Habit` in `main.rs` and `println!` it.
@@ -31,11 +31,11 @@
 ## Phase 2: Storage
 **Goal:** Persist and reload `AppData` from disk.
 
-- [ ] Decide on file path — `~/.habit_tracker/data.json`
-- [ ] Write `fn load() -> AppData` — reads JSON from disk, returns `AppData::default()` if file doesn't exist
-- [ ] Write `fn save(data: &AppData)` — serializes to JSON, writes to disk
+- [x] Decide on file path — `~/.habit_tracker/data.json`
+- [x] Write `fn load() -> AppData` — reads JSON from disk, returns `AppData::default()` if file doesn't exist
+- [x] Write `fn save(data: &AppData)` — serializes to JSON, writes to disk
 - [ ] Handle `create_dir_all` so the directory is created if missing
-- [ ] Test in `main.rs`: construct a dummy `AppData`, save it, reload it, print it
+- [x] Test in `main.rs`: construct a dummy `AppData`, save it, reload it, print it
 
 **Checkpoint:** You can kill the program and relaunch — data survives.
 
@@ -57,7 +57,7 @@
 **Goal:** Full CRUD on habits for a logged-in user.
 
 - [ ] Write `fn add_habit(user: &mut User)` — prompt all fields, parse `Occurrence` and `NaiveTime` from user input, push to `user.habits`, increment `next_habit_id`
-- [ ] Write `fn list_habits(user: &User)` — print all habits with their current status, call `refresh_for_today()` on each first
+- [x] Write `fn list_habits(user: &User)` — print all habits with their current status, call `refresh_for_today()` on each first
 - [ ] Write `fn complete_habit(user: &mut User)` — prompt habit id, mark complete
 - [ ] Write `fn skip_habit(user: &mut User)` — prompt habit id, mark skipped
 - [ ] Write `fn delete_habit(user: &mut User)` — prompt habit id, remove from vec

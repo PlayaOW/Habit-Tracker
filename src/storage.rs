@@ -1,5 +1,5 @@
 use crate::models::{AppData, User};
-use std::{fs::{self, File}, io::Read};
+use std::fs;
 
 impl AppData {
     pub fn update_json(path: &str, new_item: &User) -> Result<(), Box<dyn std::error::Error>> {
